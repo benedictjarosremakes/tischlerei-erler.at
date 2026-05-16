@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erler | Tischlerei</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        :root {
+            /* Colors */
+            --color-bg: #FAF8F5;
+            --color-surface: #EBE6DF;
+            --color-text: #2B2624;
+            --color-text-muted: #7A726D;
+            --color-accent: #9D3716;
+            --color-footer-bg: #2B2624;
+            --color-footer-text: #FAF8F5;
+
+            /* Typography */
+            --font-heading: 'Lora', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Type Scale */
+            --text-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+            --text-sm: clamp(0.875rem, 1.8vw, 1rem);
+            --text-base: clamp(1rem, 2vw, 1.125rem);
+            --text-lg: clamp(1.125rem, 2.5vw, 1.375rem);
+            --text-xl: clamp(1.375rem, 3vw, 1.75rem);
+            --text-2xl: clamp(1.75rem, 4vw, 2.5rem);
+            --text-3xl: clamp(2.25rem, 5vw, 3.5rem);
+            --text-4xl: clamp(3rem, 7vw, 5rem);
+
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            --space-32: 8rem;
+
+            --section-padding: clamp(4rem, 10vw, 8rem);
+
+            /* Z-Index Layers */
+            --z-base: 0;
+            --z-raised: 10;
+            --z-dropdown: 100;
+            --z-sticky: 200;
+            --z-overlay: 500;
+            --z-modal: 1000;
+            --z-toast: 2000;
+            --z-max: 9000;
+        }
+
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        body {
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+            position: relative;
+            z-index: var(--z-raised);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+        }
+
+        h1 { font-size: var(--text-4xl); }
+        h2 { font-size: var(--text-3xl); margin-bottom: var(--space-6); }
+        h3 { font-size: var(--text-2xl); }
+
+        .text-muted { color: var(--color-text-muted); }
+        .text-accent { color: var(--color-accent); }
+        
+        .label {
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            display: block;
+            margin-bottom: var(--space-2);
+        }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px; /* Consistent mobile padding */
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 var(--space-8);
+            }
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+        }
+
+        .bg-surface {
+            background-color: var(--color-surface);
+        }
+
+        /* Icons */
+        [data-lucide] {
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+            line-height: 1;
+            pointer-events: none;
+            width: 20px;
+            height: 20px;
+            stroke-width: 1.5;
+            color: currentColor;
+        }
+
+        .icon-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45em;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45em;
+            padding: 1rem 2rem;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--color-text);
+            background: transparent;
+            color: var(--color-text);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: var(--z-raised);
+        }
+
+        .btn:hover {
+            background: var(--color-text);
+            color: var(--color-bg);
+            border-color: var(--color-text);
+        }
+
+        .btn-accent {
+            background: var(--color-accent);
+            color: var(--color-bg);
+            border-color: var(--color-accent);
+        }
+
+        .btn-accent:hover {
+            background: #802c12;
+            border-color: #802c12;
+            color: var(--color-bg);
+        }
+
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-text);
+            color: var(--color-bg);
+            padding: 8px;
+            z-index: var(--z-max);
+            transition: top 0.2s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+
+        /* Header & Nav */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            padding: var(--space-4) 0;
+            background-color: var(--color-bg); /* Solid background on mobile */
+            border-bottom: 1px solid rgba(43, 38, 36, 0.05);
+            transition: background-color 0.3s ease, padding 0.3s ease;
+        }
+
+        @media (min-width: 1024px) {
+            .site-header {
+                background-color: transparent;
+                border-bottom: none;
+            }
+            .site-header.scrolled {
+                background-color: rgba(250, 248, 245, 0.95);
+                backdrop-filter: blur(10px);
+                padding: var(--space-3) 0;
+                border-bottom: 1px solid rgba(43, 38, 36, 0.05);
+            }
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: var(--text-xl);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--color-text);
+            position: relative;
+            z-index: var(--z-raised);
+        }
+
+        .desktop-nav {
+            display: none;
+        }
+
+        .desktop-nav ul {
+            display: flex;
+            gap: var(--space-8);
+        }
+
+        .desktop-nav a {
+            font-size: var(--text-sm);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Mobile Nav */
+        .nav-toggle {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1002;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-text);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: var(--color-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .mobile-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-links {
+            text-align: center;
+        }
+
+        .mobile-nav-links li {
+            margin: var(--space-4) 0;
+        }
+
+        .mobile-nav-links a {
+            font-family: var(--font-heading);
+            font-size: var(--text-2xl);
+            display: block;
+            padding: var(--space-2);
+        }
+
+        @media (min-width: 769px) {
+            .nav-toggle { display: none; pointer-events: none; }
+            .desktop-nav { display: block; }
+            .mobile-overlay { display: none !important; }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            padding: var(--space-12) var(--space-6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .hero-image {
+            height: 50vh;
+            width: 100%;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 1024px) {
+            .hero {
+                grid-template-columns: 5fr 7fr;
+                padding-top: 0;
+            }
+            .hero-content {
+                padding-left: max(var(--space-8), calc((100vw - 1280px) / 2 + var(--space-8)));
+                padding-right: var(--space-12);
+            }
+            .hero-image {
+                height: 100vh;
+            }
+            .hero-content h1 {
+                margin-right: -25%;
+                position: relative;
+                z-index: 3;
+            }
+        }
+
+        .hero h1 {
+            margin-bottom: var(--space-4);
+        }
+
+        .hero p {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            max-width: 400px;
+            margin-bottom: var(--space-8);
+        }
+
+        /* Intro & History */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-16);
+        }
+
+        @media (min-width: 768px) {
+            .intro-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .intro-text p {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-6);
+        }
+
+        .timeline {
+            border-left: 1px solid rgba(43, 38, 36, 0.1);
+            padding-left: var(--space-6);
+            margin-top: var(--space-8);
+            margin-left: var(--space-4); /* Prevents clipping of dots on mobile */
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--space-6);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: calc(var(--space-6) * -1 - 4px);
+            top: 6px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--color-accent);
+        }
+
+        .timeline-year {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: var(--space-1);
+        }
+
+        .team-image-wrapper {
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .team-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Workshop Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-6);
+        }
+
+        @media (min-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+            .gallery-item:nth-child(2) { grid-column: span 1; grid-row: span 1; }
+            .gallery-item:nth-child(3) { grid-column: span 1; grid-row: span 1; }
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 300px;
+            background: var(--color-surface);
+        }
+
+        @media (min-width: 1024px) {
+            .gallery-item:nth-child(1) { height: 100%; min-height: 600px; }
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Works / Instagram */
+        .works-section {
+            text-align: center;
+            padding: var(--space-24) 0;
+        }
+
+        .works-section h2 {
+            margin-bottom: var(--space-8);
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--color-footer-bg);
+            color: var(--color-footer-text);
+            padding: clamp(4rem, 8vw, 7rem) 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+            margin-bottom: var(--space-16);
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr;
+            }
+        }
+
+        .footer-brand h3 {
+            font-size: var(--text-2xl);
+            color: var(--color-footer-text);
+            margin-bottom: var(--space-2);
+        }
+
+        .footer-brand p {
+            color: rgba(250, 248, 245, 0.7);
+            margin-bottom: var(--space-6);
+            max-width: 300px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-4);
+        }
+
+        .social-links a, .social-links button {
+            color: var(--color-footer-text);
+            opacity: 0.7;
+            transition: all 0.2s ease;
+        }
+
+        .social-links a:hover, .social-links button:hover {
+            opacity: 1;
+            color: var(--color-accent);
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(250, 248, 245, 0.5);
+            margin-bottom: var(--space-6);
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .footer-col a, .footer-col button {
+            color: rgba(250, 248, 245, 0.8);
+            text-align: left;
+            font-size: var(--text-sm);
+            transition: color 0.2s ease;
+        }
+
+        .footer-col a:hover, .footer-col button:hover {
+            color: var(--color-footer-text);
+        }
+
+        .contact-item {
+            color: rgba(250, 248, 245, 0.8);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-3);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(250, 248, 245, 0.1);
+            padding-top: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            font-size: var(--text-xs);
+            color: rgba(250, 248, 245, 0.5);
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        /* Modals & Lightbox */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: var(--space-4);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: var(--color-bg);
+            padding: 2.5rem;
+            border-radius: 4px;
+            max-width: 480px;
+            width: 100%;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.open .modal-card {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            padding: var(--space-2);
+            color: var(--color-text-muted);
+            transition: color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--color-accent);
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-height: 90vh;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #fff;
+            padding: 8px;
+            transition: color 0.2s ease;
+        }
+        
+        .lightbox-close:hover {
+            color: var(--color-accent);
+        }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: var(--space-4);
+            left: var(--space-4);
+            right: var(--space-4);
+            background: var(--color-bg);
+            border: 1px solid var(--color-surface);
+            padding: var(--space-6);
+            z-index: 8000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            transform: translateY(150%);
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @media (min-width: 768px) {
+            .cookie-banner {
+                max-width: 400px;
+                right: auto;
+            }
+        }
+
+        .cookie-banner.visible {
+            transform: translateY(0);
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        .cookie-buttons button {
+            flex: 1;
+            padding: 0.75rem;
+            font-size: var(--text-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--color-text);
+            transition: all 0.2s ease;
+        }
+
+        .btn-accept { background: var(--color-text); color: var(--color-bg); }
+        .btn-accept:hover { background: var(--color-accent); border-color: var(--color-accent); }
+        
+        .btn-decline { background: transparent; color: var(--color-text); }
+        .btn-decline:hover { background: var(--color-surface); }
+
+    </style>
+</head>
+<body>
+<!-- DEMO NOTICE BANNER - benedictjaros.com -->
+<style>
+#__demo_spacer{display:block;}
+#__demo_notice,#__demo_notice *{box-sizing:border-box;margin:0;padding:0;}
+#__demo_notice{
+  position:fixed;top:0;left:0;right:0;z-index:99999;
+  background:rgba(9,9,11,.97);
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+#__demo_inner{
+  max-width:1280px;margin:0 auto;
+  padding:0 44px 0 18px;min-height:38px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+#__demo_dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:#f5c842;box-shadow:0 0 7px rgba(245,200,66,.55);}
+#__demo_label{color:#f5c842;font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;flex-shrink:0;}
+#__demo_divider{color:rgba(255,255,255,.15);font-size:12px;flex-shrink:0;}
+#__demo_text{color:rgba(255,255,255,.45);font-size:11.5px;line-height:1.45;flex:1 1 160px;}
+#__demo_links{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+#__demo_links a{
+  color:rgba(255,255,255,.38);font-size:11px;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  transition:color .15s,border-color .15s;white-space:nowrap;
+}
+#__demo_links a:hover{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.4);}
+#__demo_link_sep{color:rgba(255,255,255,.15);font-size:10px;}
+#__demo_close{
+  position:absolute;right:0;top:0;bottom:0;width:40px;
+  background:none;border:none;cursor:pointer;
+  color:rgba(255,255,255,.28);font-size:16px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .15s;
+}
+#__demo_close:hover{color:rgba(255,255,255,.7);}
+@media(max-width:560px){
+  #__demo_inner{padding:7px 44px 7px 14px;gap:6px;}
+  #__demo_text{font-size:11px;flex:1 1 100%;order:3;}
+  #__demo_dot,#__demo_label{order:1;}
+  #__demo_divider{order:2;}
+  #__demo_links{order:4;}
+}
+</style>
+<div id="__demo_spacer"></div>
+<div id="__demo_notice" role="banner" aria-label="Demo notice">
+  <div id="__demo_inner">
+    <span id="__demo_dot"></span>
+    <span id="__demo_label">Demo</span>
+    <span id="__demo_divider">/</span>
+    <span id="__demo_text">Unofficial remake &mdash; not the real website. All content &amp; trademarks belong to their owners.</span>
+    <div id="__demo_links">
+      <a href="https://benedictjaros.com/impressum" target="_blank" rel="noopener noreferrer">Impressum</a>
+      <span id="__demo_link_sep">&middot;</span>
+      <a href="https://benedictjaros.com/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutz</a>
+    </div>
+  </div>
+  <button id="__demo_close" aria-label="Close demo notice">&#x2715;</button>
+</div>
+<script>
+(function () {
+  var spacer = document.getElementById('__demo_spacer');
+  var b = document.getElementById('__demo_notice');
+  var x = document.getElementById('__demo_close');
+  if (!b || !spacer) return;
+  function sync() { spacer.style.height = b.offsetHeight + 'px'; }
+  function hide() {
+    b.style.display = 'none'; spacer.style.height = '0';
+    try { sessionStorage.setItem('__demo_closed', '1'); } catch (e) {}
+  }
+  try { if (sessionStorage.getItem('__demo_closed')) { b.style.display = 'none'; spacer.style.height = '0'; return; } } catch (e) {}
+  sync();
+  window.addEventListener('resize', function () { if (b.style.display !== 'none') sync(); });
+  if (x) x.addEventListener('click', hide);
+}());
+</script>
+
+
+    <a href="#main" class="skip-link">Zum Inhalt springen</a>
+
+    <header class="site-header" id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Erler</a>
+            
+            <nav class="desktop-nav" aria-label="Hauptnavigation">
+                <ul>
+                    <li><a href="#start">Start</a></li>
+                    <li><a href="#ueber-uns">Über uns</a></li>
+                    <li><a href="#werkstatt">Werkstatt</a></li>
+                    <li><a href="#arbeiten">Arbeiten</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </nav>
+
+            <button class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+        <nav aria-label="Mobile Navigation">
+            <ul class="mobile-nav-links">
+                <li><a href="#start" class="mobile-link">Start</a></li>
+                <li><a href="#ueber-uns" class="mobile-link">Über uns</a></li>
+                <li><a href="#werkstatt" class="mobile-link">Werkstatt</a></li>
+                <li><a href="#arbeiten" class="mobile-link">Arbeiten</a></li>
+                <li><a href="#kontakt" class="mobile-link">Kontakt</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main id="main">
+        <!-- Hero Section -->
+        <section id="start" class="hero">
+            <div class="hero-content">
+                <h1 class="reveal" style="--i:1">LIGNUM PASSION</h1>
+                <p class="reveal" style="--i:2">Die Leidenschaft zum Werkstoff Holz.</p>
+                <div class="reveal" style="--i:3">
+                    <a href="#ueber-uns" class="btn">Mehr erfahren <i data-lucide="arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="hero-image reveal" style="--i:2">
+                <img src="https://www.tischlerei-erler.at/wp-content/uploads/2020/08/WhatsApp-Image-2020-08-05-at-13.24.48.jpeg" alt="Detailaufnahme Holzstruktur in der Werkstatt" loading="eager">
+            </div>
+        </section>
+
+        <!-- Intro & History -->
+        <section id="ueber-uns" class="section container">
+            <div class="intro-grid">
+                <div class="intro-text reveal">
+                    <span class="label">Über uns</span>
+                    <h2>Leidenschaft in dritter Generation</h2>
+                    <p>Noch älter als die lateinische Sprache ist wohl der natürliche Werkstoff Holz. Bereits in dritter Generation habe ich es mir zur Aufgabe gemacht, mit Holz und auch anderen Materialien wie z.B. Stahl, Glas oder Stoffen, innovative Lösungen auszuarbeiten und somit Kundenwünsche zu erfüllen.</p>
+                    
+                    <div class="timeline">
+                        <p class="text-muted" style="margin-bottom: var(--space-4);">Bereits seit fast 60 Jahren besteht die Tischlerei Erler...</p>
+                        <ul class="reveal" style="--i:1">
+                            <li class="timeline-item">
+                                <div class="timeline-year">1960</div>
+                                <div class="text-muted text-sm">Gründung der Tischlerei</div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-year">1970</div>
+                                <div class="text-muted text-sm">Erweiterung der Werkstatt</div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-year">1973</div>
+                                <div class="text-muted text-sm">Meisterprüfung</div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-year">1993</div>
+                                <div class="text-muted text-sm">Übergabe an die 2. Generation</div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-year">2016</div>
+                                <div class="text-muted text-sm">Modernisierung Maschinenpark</div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-year">2020</div>
+                                <div class="text-muted text-sm">Übernahme durch 3. Generation</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="team-image-wrapper reveal" style="--i:2">
+                    <img src="https://www.tischlerei-erler.at/wp-content/uploads/2020/08/team_2.jpg" alt="Das Team der Tischlerei Erler" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Workshop Gallery -->
+        <section id="werkstatt" class="section bg-surface">
+            <div class="container">
+                <span class="label reveal">Einblicke</span>
+                <h2 class="reveal">Unsere Werkstatt</h2>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item reveal" style="--i:1" data-lightbox="https://www.tischlerei-erler.at/wp-content/uploads/2020/08/WhatsApp-Image-2020-08-05-at-13.24.48.jpeg">
+                        <img src="https://www.tischlerei-erler.at/wp-content/uploads/2020/08/WhatsApp-Image-2020-08-05-at-13.24.48.jpeg" alt="Werkstatt Detail 1" loading="lazy">
+                    </div>
+                    <div class="gallery-item reveal" style="--i:2" data-lightbox="https://www.tischlerei-erler.at/wp-content/uploads/2020/08/WhatsApp-Image-2020-08-05-at-13.24.45.jpeg">
+                        <img src="https://www.tischlerei-erler.at/wp-content/uploads/2020/08/WhatsApp-Image-2020-08-05-at-13.24.45.jpeg" alt="Werkstatt Detail 2" loading="lazy">
+                    </div>
+                    <div class="gallery-item reveal" style="--i:3" data-lightbox="https://www.tischlerei-erler.at/wp-content/uploads/2020/08/WhatsApp-Image-2020-08-05-at-13.24.33.jpeg">
+                        <img src="https://www.tischlerei-erler.at/wp-content/uploads/2020/08/WhatsApp-Image-2020-08-05-at-13.24.33.jpeg" alt="Werkstatt Detail 3" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Works / Instagram -->
+        <section id="arbeiten" class="section works-section container">
+            <span class="label reveal">Referenzen</span>
+            <h2 class="reveal">Unsere Arbeiten</h2>
+            <p class="reveal text-muted" style="margin-bottom: var(--space-8); max-width: 600px; margin-inline: auto;">Entdecken Sie aktuelle Projekte, Maßanfertigungen und Inspirationen aus unserem Handwerksalltag.</p>
+            <div class="reveal">
+                <button class="btn btn-accent icon-text" data-placeholder="Instagram Profil">
+                    <i data-lucide="instagram"></i> Mehr auf Instagram!
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="kontakt" class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand reveal">
+                    <h3>Erler</h3>
+                    <p>Präzises Handwerk und modernes Design aus Tirol. In dritter Generation.</p>
+                    <div class="social-links">
+                        <button class="icon-text" data-placeholder="Instagram" aria-label="Instagram"><i data-lucide="instagram"></i></button>
+                        <button class="icon-text" data-placeholder="Facebook" aria-label="Facebook"><i data-lucide="facebook"></i></button>
+                    </div>
+                </div>
+                
+                <div class="footer-col reveal" style="--i:1">
+                    <h4>Kontakt</h4>
+                    <div class="contact-item icon-text">
+                        <i data-lucide="map-pin"></i> Bahnhofstraße 7, 6111 Volders
+                    </div>
+                    <div class="contact-item icon-text">
+                        <i data-lucide="phone"></i> +43 676 3642005
+                    </div>
+                    <div class="contact-item icon-text">
+                        <i data-lucide="mail"></i> matthias@tischlerei-erler.at
+                    </div>
+                    <div class="contact-item text-muted" style="margin-top: var(--space-2);">
+                        UID: ATU75435012
+                    </div>
+                </div>
+
+                <div class="footer-col reveal" style="--i:2">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><button class="demo-link">Impressum</button></li>
+                        <li><button class="demo-link">Datenschutzerklärung</button></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom reveal">
+                <p>© 2026 Erler — All original content, images & trademarks are property of their respective owners. Website rebuilt by Benedict Jaros.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    
+    <!-- Placeholder Modal -->
+    <div class="modal-overlay" id="placeholderModal" role="dialog" aria-modal="true" aria-labelledby="placeholderTitle">
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Schließen"><i data-lucide="x"></i></button>
+            <h3 id="placeholderTitle" style="margin-bottom: var(--space-4);">Feature</h3>
+            <p class="text-muted">Diese Funktion wird verfügbar sein, sobald die Website gestartet und konfiguriert ist. Kontaktieren Sie uns in der Zwischenzeit — wir freuen uns, von Ihnen zu hören.</p>
+        </div>
+    </div>
+
+    <!-- Demo Notice Modal (Legal Links) -->
+    <div class="modal-overlay" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Schließen"><i data-lucide="x"></i></button>
+            <h3 id="demoTitle" style="margin-bottom: var(--space-4);">Rechtliche Hinweise</h3>
+            <p class="text-muted" style="margin-bottom: var(--space-6);">Diese Website ist ein Demo-Remake und wurde nicht von oder für das Unternehmen erstellt. Die Inhalte dienen ausschließlich Demonstrationszwecken. Für unsere eigenen rechtlichen Informationen:</p>
+            <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                <a href="https://benedictjaros.com/impressum" target="_blank" class="icon-text text-accent"><i data-lucide="external-link" style="width: 16px; height: 16px;"></i> Impressum</a>
+                <a href="https://benedictjaros.com/datenschutz" target="_blank" class="icon-text text-accent"><i data-lucide="external-link" style="width: 16px; height: 16px;"></i> Datenschutz</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="modal-overlay" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Bildansicht">
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Schließen"><i data-lucide="x"></i></button>
+            <img src="" alt="Großansicht" id="lightboxImage">
+        </div>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <p class="text-sm">Wir verwenden Cookies, um die Nutzererfahrung zu verbessern. Durch die Nutzung unserer Seite erklären Sie sich damit einverstanden.</p>
+        <div class="cookie-buttons">
+            <button class="btn-decline" id="btnDecline">Ablehnen</button>
+            <button class="btn-accept" id="btnAccept">Akzeptieren</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Navigation
+        const navToggle = document.getElementById('navToggle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', !isExpanded);
+            mobileOverlay.classList.toggle('open');
+            document.body.style.overflow = isExpanded ? '' : 'hidden';
+        }
+
+        navToggle.addEventListener('click', toggleMenu);
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileOverlay.classList.contains('open')) {
+                toggleMenu();
+            }
+        });
+
+        // Scroll Reveal
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.12
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Modal Logic
+        function setupModal(modalId, triggerSelector, titleAttr = null) {
+            const modal = document.getElementById(modalId);
+            const closeBtn = modal.querySelector('.modal-close, .lightbox-close');
+            const triggers = document.querySelectorAll(triggerSelector);
+
+            function openModal(e) {
+                e.preventDefault();
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                
+                if (titleAttr && modalId === 'placeholderModal') {
+                    const title = e.currentTarget.getAttribute(titleAttr);
+                    document.getElementById('placeholderTitle').innerText = title;
+                }
+            }
+
+            function closeModal() {
+                modal.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            triggers.forEach(t => t.addEventListener('click', openModal));
+            if(closeBtn) closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+            });
+        }
+
+        setupModal('placeholderModal', '[data-placeholder]', 'data-placeholder');
+        setupModal('demoModal', '.demo-link');
+
+        // Lightbox Logic
+        const lightboxModal = document.getElementById('lightboxModal');
+        const lightboxImg = document.getElementById('lightboxImage');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const src = item.getAttribute('data-lightbox');
+                lightboxImg.src = src;
+                lightboxModal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const lightboxCloseBtn = lightboxModal.querySelector('.lightbox-close');
+        function closeLightbox() {
+            lightboxModal.classList.remove('open');
+            document.body.style.overflow = '';
+            setTimeout(() => lightboxImg.src = '', 300);
+        }
+
+        if(lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeLightbox);
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightboxModal.classList.contains('open')) closeLightbox();
+        });
+
+        // Cookie Banner Logic
+        const cookieBanner = document.getElementById('cookieBanner');
+        const btnAccept = document.getElementById('btnAccept');
+        const btnDecline = document.getElementById('btnDecline');
+
+        if (!localStorage.getItem('cookie_consent')) {
+            setTimeout(() => {
+                cookieBanner.classList.add('visible');
+            }, 1000);
+        }
+
+        function handleConsent(choice) {
+            localStorage.setItem('cookie_consent', choice);
+            cookieBanner.classList.remove('visible');
+        }
+
+        btnAccept.addEventListener('click', () => handleConsent('accepted'));
+        btnDecline.addEventListener('click', () => handleConsent('declined'));
+
+    </script>
+</body>
+</html>
